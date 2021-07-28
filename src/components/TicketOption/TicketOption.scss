@@ -1,0 +1,36 @@
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  @media (max-width: 767.98px) {
+   font-size: 10px;
+  }
+
+
+  &__item {
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+
+
+    &:hover{
+      background: #F1FCFF;
+    }
+    &.active{
+      background: #2196F3;
+      color: #FFFFFF;
+    }
+  }
+}

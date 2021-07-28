@@ -1,9 +1,82 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.wrapper{
-    background: #E5E5E5;
+a:focus,
+a:active {
+  outline: none;
 }
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+body {
+  line-height: 1.2;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  height: 100%;
+  background: #E5E5E5;
+  color: #4A4A4A;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 970px;
+  width: 100%;
+  margin: 0 auto;
+  @media (max-width: 982px) {
+    max-width: 750px;
+  }
+  @media (max-width: 767.98px) {
+    max-width: 550px;
+    padding: 0 10px;
+  }
+}
+
+.block-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-areas: 'par opt'
+                       'par tic'
+                        '. btn';
+  @media (max-width: 767.98px) {
+    grid-template-areas: 'opt opt'
+                         'par par'
+                          'tic tic'
+                           'btn btn';
+  }
+}
+
+.params {
+  grid-area: par;
+  height: 260px;
+}
+
+.options {
+  height: 50px;
+  grid-area: opt;
+}
+
+.ticket-container {
+  grid-area: tic;
+}
+.btn-block{
+  grid-area: btn;
+}
+
+
+

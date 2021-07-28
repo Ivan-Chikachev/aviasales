@@ -1,0 +1,59 @@
+.params {
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1px 0;
+  line-height: 20px;
+  overflow: hidden;
+
+  &__title {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 20px 0 10px 20px;
+  }
+
+  &__check-block {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.check {
+  padding: 10px 20px 10px 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &:last-child{
+    margin: 0;
+  }
+  &:hover{
+    background: #F1FCFF;
+  }
+
+  &__input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:checked + .check__box {
+      background-image: url("../../access/img/checked.svg");
+    }
+
+    &:focus + .check__box {
+      background-image: url("../../access/img/hover.svg");
+    }
+
+    &:checked:focus + .check__box {
+      background-image: url("../../access/img/checked.svg");
+    }
+  }
+
+  &__box {
+    margin: 0 0 0 -30px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../access/img/noactive.svg");
+  }
+}
