@@ -1,31 +1,31 @@
 import React from 'react';
-import './Ticket.scss';
+import classes from './Ticket.module.scss';
 
-const TimeWay = ({ i }) => {
-    const hours = Math.floor(i.segments[0].duration / 60);
-    const mins = i.segments[0].duration - (hours * 60);
+const TimeWay = ({ item }) => {
+    const hour = Math.floor(item.segments[0].duration / 60);
+    const min = item.segments[0].duration - (hour * 60);
 
-    const hours2 = Math.floor(i.segments[1].duration / 60);
-    const mins2 = i.segments[1].duration - (hours2 * 60);
+    const hour2 = Math.floor(item.segments[1].duration / 60);
+    const min2 = item.segments[1].duration - (hour2 * 60);
 
     return (
-        <div className="ticket__item">
-            <div className="ticket__name">
+        <div className={classes["ticket__item"]}>
+            <div className={classes["ticket__name"]}>
                 В пути
             </div>
-            <div className="ticket__text ticket__text--time">
-                {hours}
+            <div className={classes["ticket__text"] + ' ' + classes["ticket__text--time"]}>
+                {hour}
                 ч
-                {mins}
+                {min}
                 м
             </div>
-            <div className="ticket__name">
+            <div className={classes["ticket__name"]}>
                 В пути
             </div>
-            <div className="ticket__text ticket__text--time">
-                {hours2}
+            <div className={classes["ticket__text"] + ' ' + classes["ticket__text--time"]}>
+                {hour2}
                 ч
-                {mins2}
+                {min2}
                 м
             </div>
         </div>

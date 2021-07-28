@@ -1,23 +1,23 @@
 import React from 'react';
-import './Ticket.scss';
+import classes from './Ticket.module.scss';
 
-const TransferWay = ({ i }) => (
-    <div className="ticket__item">
-        <div className="ticket__name">
-            {i.segments[0].stops.length}
+const TransferWay = ({ item }) => (
+    <div className={classes["ticket__item"]}>
+        <div className={classes["ticket__name"]}>
+            {item.segments[0].stops.length}
             {' '}
             Пересадки
         </div>
-        <div className="ticket__text">
-            {i.segments[0].stops.join(', ')}
+        <div className={classes["ticket__text"]}>
+            {item.segments[0].stops.join(', ')}
         </div>
-        <div className="ticket__name">
-            {i.segments[1].stops.length}
+        <div className={classes["ticket__name"]}>
+            {item.segments[1].stops.length}
             {' '}
             Пересадки
         </div>
-        <div className="ticket__text">
-            {i.segments[1].stops.join(', ')}
+        <div className={classes["ticket__text"]}>
+            {item.segments[1].stops.join(', ')}
         </div>
     </div>
 );

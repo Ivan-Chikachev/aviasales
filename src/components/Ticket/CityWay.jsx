@@ -1,8 +1,8 @@
 import React from 'react';
-import './Ticket.scss';
+import classes from './Ticket.module.scss';
 import { format } from 'date-fns';
 
-const CityWay = ({ i }) => {
+const CityWay = ({ item }) => {
     const getDate = (date, duration) => {
         const newDate = new Date(date);
         const pointA = newDate.getTime();
@@ -13,30 +13,30 @@ const CityWay = ({ i }) => {
         ];
     };
 
-    const [originPoint1, originPoint2] = getDate(i.segments[0].date, i.segments[0].duration);
-    const [destPoint1, destPoint2] = getDate(i.segments[1].date, i.segments[1].duration);
+    const [originPoint1, originPoint2] = getDate(item.segments[0].date, item.segments[0].duration);
+    const [destPoint1, destPoint2] = getDate(item.segments[1].date, item.segments[1].duration);
 
     return (
-        <div className="ticket__item">
-            <div className="ticket__name">
-                {i.segments[0].origin}
+        <div className={classes["ticket__item"]}>
+            <div className={classes["ticket__name"]}>
+                {item.segments[0].origin}
                 {' '}
                 -
-                {i.segments[0].destination}
+                {item.segments[0].destination}
             </div>
-            <div className="ticket__text">
+            <div className={classes["ticket__text"]}>
                 {originPoint1}
                 {' '}
                 -
                 {originPoint2}
             </div>
-            <div className="ticket__name">
-                {i.segments[1]?.origin}
+            <div className={classes["ticket__name"]}>
+                {item.segments[1]?.origin}
                 {' '}
                 -
-                {i.segments[1].destination}
+                {item.segments[1].destination}
             </div>
-            <div className="ticket__text">
+            <div className={classes["ticket__text"]}>
                 {destPoint1}
                 {' '}
                 -

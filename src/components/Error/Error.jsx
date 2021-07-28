@@ -1,9 +1,9 @@
 import React from 'react';
-import './Error.scss';
+import classes from './Error.module.scss';
 
 const Error = () => (
-    <div className="error">
-      ошибка
+    <div className={classes.error}>
+      Упс... Произошла ошибка сервера, попробуйте позже
     </div>
 );
 

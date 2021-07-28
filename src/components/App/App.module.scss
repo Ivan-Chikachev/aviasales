@@ -50,33 +50,9 @@ body {
 .block-grid {
   display: grid;
   gap: 20px;
-  grid-template-areas: 'par opt'
-                       'par tic'
-                        '. btn';
+  grid-template-areas: 'par opt' 'par tic' '. btn';
   @media (max-width: 767.98px) {
-    grid-template-areas: 'opt opt'
-                         'par par'
-                          'tic tic'
-                           'btn btn';
+    grid-template-areas: 'opt' 'par' 'tic' 'btn';
   }
 }
-
-.params {
-  grid-area: par;
-  height: 260px;
-}
-
-.options {
-  height: 50px;
-  grid-area: opt;
-}
-
-.ticket-container {
-  grid-area: tic;
-}
-.btn-block{
-  grid-area: btn;
-}
-
-
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './TransferParams.scss';
+import classes from './TransferParams.module.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/TransferParams/transferParamsActions';
 
@@ -16,57 +16,57 @@ const TransferParams = ({
         chooseAllParams();
     });
     return (
-        <div className="params">
-            <h5 className="params__title">Количество пересадок</h5>
-            <div className="params__check-block">
-                <label className="check">
+        <div className={classes.params}>
+            <h5 className={classes["params__title"]}>Количество пересадок</h5>
+            <div className={classes["params__check-block"]}>
+                <label className={classes.check}>
                     <input
-                        type="checkbox" className="check__input"
+                        type="checkbox" className={classes["check__input"]}
                         checked={paramsAll}
                         onChange={paramsAllHandler}
                         value={paramsAll}
                     />
-                    <span className="check__box" />
+                    <span className={classes["check__box"]} />
                     Все
                 </label>
-                <label className="check">
+                <label className={classes.check}>
                     <input
-                        type="checkbox" className="check__input"
+                        type="checkbox" className={classes["check__input"]}
                         onChange={changeParamsNull}
                         checked={paramsTransferNull}
                         value={paramsTransferNull}
                     />
-                    <span className="check__box" />
+                    <span className={classes["check__box"]} />
                     Без пересадок
                 </label>
-                <label className="check">
+                <label className={classes.check}>
                     <input
-                        type="checkbox" className="check__input"
+                        type="checkbox" className={classes["check__input"]}
                         onChange={changeParamsOne}
                         checked={paramsTransferOne}
                         value={paramsTransferOne}
                     />
-                    <span className="check__box" />
+                    <span className={classes["check__box"]} />
                     1 пересадка
                 </label>
-                <label className="check">
+                <label className={classes.check}>
                     <input
-                        type="checkbox" className="check__input"
+                        type="checkbox" className={classes["check__input"]}
                         onChange={changeParamsTwo}
                         checked={paramsTransferTwo}
                         value={paramsTransferTwo}
                     />
-                    <span className="check__box" />
+                    <span className={classes["check__box"]} />
                     2 пересадки
                 </label>
-                <label className="check">
+                <label className={classes.check}>
                     <input
-                        type="checkbox" className="check__input"
+                        type="checkbox" className={classes["check__input"]}
                         onChange={changeParamsThree}
                         checked={paramsTransferThree}
                         value={paramsTransferThree}
                     />
-                    <span className="check__box" />
+                    <span className={classes["check__box"]} />
                     3 пересадки
                 </label>
             </div>

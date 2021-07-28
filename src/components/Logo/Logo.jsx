@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from '../../access/img/Logo.svg';
-import './Logo.scss';
+import classes from './Logo.module.scss';
 
 const Logo = () => (
-        <div className="logo">
+        <div className={classes.logo}>
             <img src={logo} alt="" />
         </div>
     );
