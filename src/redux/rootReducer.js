@@ -1,10 +1,10 @@
-import {combineReducers} from 'redux';
-import {transferParamsReducer} from './TransferParams/transferParamsReducer';
-import {ticketsReducer} from './Tickets/ticketsReducer';
-import {appReducer} from "./App/appReducer";
+import { combineReducers } from 'redux';
+import { transferFilterReducer } from './TransferFilter/transferFilterReducer';
+import { ticketsReducer } from './Tickets/ticketsReducer';
+import { sortReducer } from './Sort/sortReducer';
 
 export const rootReducer = combineReducers({
-    transferParams: transferParamsReducer,
+    transferFilter: transferFilterReducer,
     tickets: ticketsReducer,
-    app: appReducer
+    sort: sortReducer,
 });

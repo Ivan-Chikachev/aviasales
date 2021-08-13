@@ -50,9 +50,12 @@ body {
 .block-grid {
   display: grid;
   gap: 20px;
-  grid-template-areas: 'par opt' 'par tic' '. btn';
+  grid-template-areas: 'par opt' 'par tic' 'par .' '. btn';
   @media (max-width: 767.98px) {
     grid-template-areas: 'opt' 'par' 'tic' 'btn';
   }
 }
 
+.loader-container{
+  height: 40px;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './ShowButton.module.scss';
 
-const ShowButton = () => (
+const ShowButton = ({ onShowClick }) => (
         <div className={classes['btn-block']}>
-            <button className={classes.btn}>
+            <button onClick={onShowClick} className={classes.btn}>
                 Показать еще 5 билетов!
             </button>
         </div>

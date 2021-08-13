@@ -1,0 +1,77 @@
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import classes from './Ticket.module.scss';
+import * as actions from '../../redux/Tickets/ticketsActions';
+import ShowButton from '../ShowButton/ShowButton';
+import TicketItem from './TicketItem/TicketItem';
+
+const TicketList = ({ initialTickets, activeSortTab, transferFilter }) => {
+    const [showItemCount, addShowItemCount] = useState(5);
+    const [currentTickets, setCurrentTickets] = useState([]);
+    const [tickets, setTickets] = useState([]);
+    const [stop, setStop] = useState([]);
+
+    // Сортировка билетов
+    useEffect(() => {
+        if (activeSortTab === 'all') setTickets(initialTickets);
+
+        if (activeSortTab === 'cheapest') setTickets(initialTickets.sort((a, b) => a.price - b.price));
+
+        if (activeSortTab === 'fastest') {
+ setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration
+            - (b.segments[0].duration + b.segments[1].duration)));
+}
+
+        if (activeSortTab === 'optimal') {
+ setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration + a.price
+            - (b.segments[0].duration + b.segments[1].duration + b.price)));
+}
+    }, [activeSortTab, initialTickets]);
+
+    // Добавление в массив активных id фильтров
+    useEffect(() => {
+        const filterStop = transferFilter.reduce((acc, i) => {
+            if (i.status === true) {
+                acc.push(i.id);
+            }
+            return acc;
+        }, []);
+        setStop(filterStop);
+    }, [initialTickets]);
+
+    // Фильтрация билетов
+    useEffect(() => {
+        const filterTickets = tickets.filter((i) => (stop.includes(i.segments[0].stops.length)));
+        setTickets(filterTickets);
+    }, [stop]);
+
+    // Обрезка массива билетов
+    useEffect(() => {
+        setCurrentTickets(tickets.slice(0, showItemCount));
+    }, [showItemCount, tickets]);
+
+    const onShowClick = () => {
+        addShowItemCount((i) => i + 5);
+    };
+
+    return (
+        <div className={classes['ticket-container']}>
+            {currentTickets.map((i) => (
+                <TicketItem key={i.price + i.carrier} item={i} />
+            ))}
+            {tickets.length ? null : <div>Рейсов, подходящих под заданные фильтры, не найдено</div>}
+            {tickets.length > 5 ? <ShowButton onShowClick={onShowClick} /> : null}
+        </div>
+    );
+};
+
+const mapStateToProps = (state) => ({
+    initialTickets: [
+        ...state.tickets.ticketsStart,
+        ...state.tickets.ticketsEnd,
+    ],
+    activeSortTab: state.sort.activeSortTab,
+    transferFilter: state.transferFilter,
+});
+
+export default connect(mapStateToProps, actions)(TicketList);
