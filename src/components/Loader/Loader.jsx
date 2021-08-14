@@ -5,9 +5,9 @@ const Loader = () => (
     <div className={classes['loader-wrap']}>
         Загружаем все билеты
         <div className={classes['lds-ellipsis']}>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div />
+            <div />
+            <div />
         </div>
     </div>
 );

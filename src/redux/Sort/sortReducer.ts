@@ -2,7 +2,7 @@ import {CHANGE_SORT_ID} from "../types";
 import {ChangeSortIdType} from "./sortActions";
 
 type SortType = {
-    label: string
+    label: string,
     id: string
 }
 

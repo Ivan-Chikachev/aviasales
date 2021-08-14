@@ -4,15 +4,15 @@ import {
 import ticketAPI from '../../api/api';
 
 type GetTicketsStartACType = {
-    type: typeof GET_TICKETS_START
+    type: typeof GET_TICKETS_START,
     tickets: Array<{}>
 }
 type GetTicketsEndACType = {
-    type: typeof GET_TICKETS_END
+    type: typeof GET_TICKETS_END,
     tickets: Array<{}>
 }
 type GetSearchIdACType = {
-    type: typeof GET_SEARCH_ID
+    type: typeof GET_SEARCH_ID,
     payload: string
 }
 type ErrorServerACType = {

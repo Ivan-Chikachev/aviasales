@@ -1,7 +1,7 @@
 import {CHANGE_SORT_ID} from "../types";
 
 export type ChangeSortIdType = {
-    type: typeof CHANGE_SORT_ID
+    type: typeof CHANGE_SORT_ID,
     sortId: string
 }
 

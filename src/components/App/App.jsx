@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import classes from './App.module.scss';
 import TransferParams from '../TransferFilter/TransferFilter';
 import TicketSort from '../TicketSort/TicketSort';
@@ -12,7 +12,6 @@ import Loader from '../Loader/Loader';
 const App = ({
                  isError, searchId, getSearchId, getTicketsStart, getTicketsEnd, stop, ticketsEnd, isLoad,
              }) => {
-
     useEffect(() => {
         getSearchId();
     }, []);
@@ -30,17 +29,17 @@ const App = ({
     return (
         <div className={classes.wrapper}>
             <div className={classes.container}>
-                <Logo/>
+                <Logo />
                 <div className={classes['loader-container']}>
-                    {isLoad && <Loader/>}
+                    {isLoad && <Loader />}
                 </div>
                 {isError
-                    ? <Error/>
+                    ? <Error />
                     : (
                         <div className={classes['block-grid']}>
-                            <TransferParams/>
-                            <TicketSort/>
-                            <Ticket/>
+                            <TransferParams />
+                            <TicketSort />
+                            <Ticket />
                         </div>
                     )}
             </div>

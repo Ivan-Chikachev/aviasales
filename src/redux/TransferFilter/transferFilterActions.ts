@@ -1,11 +1,11 @@
 import {CHANGE_FILTER} from '../types';
 
 export type ChangeFilterType = {
-    type: typeof CHANGE_FILTER
-    id: number
+    type: typeof CHANGE_FILTER,
+    id: string
 }
 
-export const changeFilter = (id = 10): ChangeFilterType => {
+export const changeFilter = (id = "all"): ChangeFilterType => {
 
     return (
         {
@@ -13,4 +13,3 @@ export const changeFilter = (id = 10): ChangeFilterType => {
             id
         }
     )
-}
