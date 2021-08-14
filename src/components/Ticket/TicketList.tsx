@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import classes from './Ticket.module.scss';
-import * as actions from '../../redux/Tickets/ticketsActions';
 import ShowButton from '../ShowButton/ShowButton';
 import TicketItem from './TicketItem/TicketItem';
 import {ParamsType, TicketsType} from "../../types/types";
+import {AppStateType} from "../../redux/rootReducer";
 
-type PropTypes = {
+type StateType = {
     initialTickets: Array<TicketsType>
     activeSortTab: string
     transferFilter: Array<ParamsType>
 }
 
+type PropTypes = StateType
+
 const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transferFilter}) => {
+
     const [showItemCount, addShowItemCount] = useState<number>(5);
     const [currentTickets, setCurrentTickets] = useState<Array<TicketsType>>([]);
     const [tickets, setTickets] = useState<Array<TicketsType>>([]);
@@ -72,7 +75,7 @@ const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transfe
     );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType): StateType => ({
     initialTickets: [
         ...state.tickets.ticketsStart,
         ...state.tickets.ticketsEnd,
@@ -81,4 +84,4 @@ const mapStateToProps = (state: any) => ({
     transferFilter: state.transferFilter,
 });
 
-export default connect(mapStateToProps, actions)(TicketList);
+export default connect(mapStateToProps, null)(TicketList);

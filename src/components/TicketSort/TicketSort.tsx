@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import classes from './TicketSort.module.scss';
 import * as actions from '../../redux/Sort/sortActions';
 import {SortType} from "../../types/types";
+import {AppStateType} from "../../redux/rootReducer";
 
 type PropTypes = {
     changeSortId: (sortType: string) => void
@@ -27,7 +28,7 @@ const TicketSort: React.FC<PropTypes> = ({changeSortId, sortTabs, activeSortTab}
     </div>
 );
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) => ({
     sortTabs: state.sort.sortTabs,
     activeSortTab: state.sort.activeSortTab,
 });

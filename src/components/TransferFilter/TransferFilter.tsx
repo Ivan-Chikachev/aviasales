@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classes from './TransferFilter.module.scss';
 import * as actions from '../../redux/TransferFilter/transferFilterActions';
 import {ParamsType} from "../../types/types";
+import {AppStateType} from "../../redux/rootReducer";
 
 type PropTypes = {
     params: Array<ParamsType>
@@ -28,7 +29,7 @@ const TransferFilter: React.FC<PropTypes> = ({ params, changeFilter }) => (
         </div>
     );
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) => ({
     params: state.transferFilter,
 });
 

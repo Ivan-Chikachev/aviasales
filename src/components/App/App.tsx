@@ -9,23 +9,27 @@ import Error from '../Error/Error';
 import Logo from '../Logo/Logo';
 import Loader from '../Loader/Loader';
 import {TicketsType} from "../../types/types";
+import {AppStateType} from "../../redux/rootReducer";
 
-type PropTypes = {
+type StateTypes = {
     isError: boolean
     searchId: string
+    ticketsEnd: Array<TicketsType>
+    isLoad: boolean
+}
+
+type ActionTypes = {
     getSearchId: () => void
     getTicketsStart: (searchId: string) => void
     getTicketsEnd: (searchId: string) => void
-    stop: boolean
-    ticketsEnd: Array<TicketsType>
-    isLoad: boolean
-
 }
+
+type PropTypes = StateTypes & ActionTypes
 
 const App: React.FC<PropTypes> = ({
                                       isError, searchId,
                                       getSearchId, getTicketsStart,
-                                      getTicketsEnd, stop, ticketsEnd,
+                                      getTicketsEnd, ticketsEnd,
                                       isLoad,
                                   }) => {
     useEffect(() => {
@@ -37,7 +41,7 @@ const App: React.FC<PropTypes> = ({
     }, [searchId]);
 
     useEffect(() => {
-        if (searchId && !stop) {
+        if (searchId) {
             getTicketsEnd(searchId);
         }
     }, [searchId, ticketsEnd]);
@@ -63,10 +67,9 @@ const App: React.FC<PropTypes> = ({
     );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType): StateTypes => ({
     isError: state.tickets.isError,
     searchId: state.tickets.searchId,
-    stop: state.tickets.stop,
     ticketsEnd: state.tickets.ticketsEnd,
     isLoad: state.tickets.isLoad,
 });

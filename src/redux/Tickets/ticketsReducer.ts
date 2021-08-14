@@ -1,10 +1,11 @@
 import {
  ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_START, GET_TICKETS_END, OFF_LOADING,
 } from '../types';
+import {TicketsType} from "../../types/types";
 
 const initialState = {
-    ticketsStart: [] as Array<{}>,
-    ticketsEnd: [] as Array<{}>,
+    ticketsStart: [] as Array<TicketsType>,
+    ticketsEnd: [] as Array<TicketsType>,
     searchId: '',
     isLoad: true,
     isError: false,
