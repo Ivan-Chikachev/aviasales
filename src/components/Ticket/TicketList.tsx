@@ -84,4 +84,4 @@ const mapStateToProps = (state: AppStateType): StateType => ({
     transferFilter: state.transferFilter,
 });
 
-export default connect(mapStateToProps, null)(TicketList);
+export default connect(mapStateToProps, {})(TicketList);

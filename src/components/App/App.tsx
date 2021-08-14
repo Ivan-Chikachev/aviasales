@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import classes from './App.module.scss';
 import TransferParams from '../TransferFilter/TransferFilter';
 import TicketSort from '../TicketSort/TicketSort';
-import Ticket from '../Ticket/TicketList';
+import TicketList from '../Ticket/TicketList';
 import * as actions from '../../redux/Tickets/ticketsActions';
 import Error from '../Error/Error';
 import Logo from '../Logo/Logo';
@@ -59,7 +59,7 @@ const App: React.FC<PropTypes> = ({
                         <div className={classes['block-grid']}>
                             <TransferParams/>
                             <TicketSort/>
-                            <Ticket/>
+                            <TicketList/>
                         </div>
                     )}
             </div>

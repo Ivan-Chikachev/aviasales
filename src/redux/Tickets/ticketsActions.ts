@@ -42,6 +42,7 @@ export const getTicketsStart = (searchId: string) => async (dispatch: any) => {
             dispatch(action);
         }
     } catch (e) {
+        console.log(e.status)
         dispatch(getTicketsStart(searchId));
     }
 };
