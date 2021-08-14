@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
 import classes from './Ticket.module.scss';
 import * as actions from '../../redux/Tickets/ticketsActions';
 import ShowButton from '../ShowButton/ShowButton';
 import TicketItem from './TicketItem/TicketItem';
+import {ParamsType, TicketsType} from "../../types/types";
 
-const TicketList = ({ initialTickets, activeSortTab, transferFilter }) => {
-    const [showItemCount, addShowItemCount] = useState(5);
-    const [currentTickets, setCurrentTickets] = useState([]);
-    const [tickets, setTickets] = useState([]);
-    const [stop, setStop] = useState([]);
+type PropTypes = {
+    initialTickets: Array<TicketsType>
+    activeSortTab: string
+    transferFilter: Array<ParamsType>
+}
+
+const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transferFilter}) => {
+    const [showItemCount, addShowItemCount] = useState<number>(5);
+    const [currentTickets, setCurrentTickets] = useState<Array<TicketsType>>([]);
+    const [tickets, setTickets] = useState<Array<TicketsType>>([]);
+    const [stop, setStop] = useState<Array<number>>([]);
 
     // Сортировка билетов
     useEffect(() => {
@@ -18,19 +25,19 @@ const TicketList = ({ initialTickets, activeSortTab, transferFilter }) => {
         if (activeSortTab === 'cheapest') setTickets(initialTickets.sort((a, b) => a.price - b.price));
 
         if (activeSortTab === 'fastest') {
- setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration
-            - (b.segments[0].duration + b.segments[1].duration)));
-}
+            setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration
+                - (b.segments[0].duration + b.segments[1].duration)));
+        }
 
         if (activeSortTab === 'optimal') {
- setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration + a.price
-            - (b.segments[0].duration + b.segments[1].duration + b.price)));
-}
+            setTickets(initialTickets.sort((a, b) => a.segments[0].duration + a.segments[1].duration + a.price
+                - (b.segments[0].duration + b.segments[1].duration + b.price)));
+        }
     }, [activeSortTab, initialTickets]);
 
-    // Добавление в массив активных id фильтров
+    // Добавление в массив id активных фильтров
     useEffect(() => {
-        const filterStop = transferFilter.reduce((acc, i) => {
+        const filterStop = transferFilter.reduce((acc: Array<number>, i) => {
             if (i.status === true) {
                 acc.push(i.id);
             }
@@ -57,15 +64,15 @@ const TicketList = ({ initialTickets, activeSortTab, transferFilter }) => {
     return (
         <div className={classes['ticket-container']}>
             {currentTickets.map((i) => (
-                <TicketItem key={i.price + i.carrier} item={i} />
+                <TicketItem key={i.price + i.carrier} item={i}/>
             ))}
             {tickets.length ? null : <div>Рейсов, подходящих под заданные фильтры, не найдено</div>}
-            {tickets.length > 5 ? <ShowButton onShowClick={onShowClick} /> : null}
+            {tickets.length > 5 ? <ShowButton onShowClick={onShowClick}/> : null}
         </div>
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     initialTickets: [
         ...state.tickets.ticketsStart,
         ...state.tickets.ticketsEnd,

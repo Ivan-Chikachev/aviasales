@@ -1,11 +1,6 @@
 import {CHANGE_FILTER} from '../types';
 import {ChangeFilterType} from "./transferFilterActions";
-
-type ParamsType = {
-    label: string,
-    id: number,
-    status: boolean
-}
+import {ParamsType} from "../../types/types";
 
 type InitialStateType = Array<ParamsType>
 

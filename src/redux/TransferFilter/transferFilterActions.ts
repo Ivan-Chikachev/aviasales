@@ -5,12 +5,9 @@ export type ChangeFilterType = {
     id: number
 }
 
-export const changeFilter = (id = 10): ChangeFilterType => {
-
-    return (
-        {
-            type: CHANGE_FILTER,
-            id
-        }
-    )
-}
+export const changeFilter = (id = 10): ChangeFilterType => (
+    {
+        type: CHANGE_FILTER,
+        id
+    }
+)

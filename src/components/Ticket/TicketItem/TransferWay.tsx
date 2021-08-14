@@ -1,8 +1,13 @@
 import React from 'react';
 import classes from '../Ticket.module.scss';
 
-const TransferWay = ({ forward, back }) => {
-    const getCountTransfer = (i) => {
+type PropTypes = {
+    stopsTo: Array<string> | []
+    stopsBack: Array<string> | []
+}
+
+const TransferWay: React.FC<PropTypes> = ({ stopsTo, stopsBack }) => {
+    const getCountTransfer = (i: number) => {
         if (i === 0) return 'Без пересадок';
         if (i === 1) return '1 Пересадка';
         if (i >= 2) return `${i} Пересадки`;
@@ -11,16 +16,16 @@ const TransferWay = ({ forward, back }) => {
     return (
         <div className={classes.ticket__item}>
             <div className={classes.ticket__name}>
-                {getCountTransfer(forward.length)}
+                {getCountTransfer(stopsTo.length)}
             </div>
             <div className={classes.ticket__text}>
-                {forward.join(', ')}
+                {stopsTo.join(', ')}
             </div>
             <div className={classes.ticket__name}>
-                {getCountTransfer(back.length)}
+                {getCountTransfer(stopsBack.length)}
             </div>
             <div className={classes.ticket__text}>
-                {back.join(', ')}
+                {stopsBack.join(', ')}
             </div>
         </div>
     );

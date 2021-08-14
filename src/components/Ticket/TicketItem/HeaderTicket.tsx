@@ -1,7 +1,12 @@
 import React from 'react';
 import classes from '../Ticket.module.scss';
 
-const HeaderTicket = ({ logo, price }) => (
+type PropTypes = {
+    logo: string
+    price: number
+}
+
+const HeaderTicket: React.FC<PropTypes> = ({ logo, price }) => (
     <div className={classes.ticket__header}>
         <p className={classes.ticket__price}>
             {price.toLocaleString()}

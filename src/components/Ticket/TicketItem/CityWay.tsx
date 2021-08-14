@@ -1,9 +1,15 @@
 import React from 'react';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import classes from '../Ticket.module.scss';
+import {SegmentsTicketType} from "../../../types/types";
 
-const CityWay = ({ forward, back }) => {
-    const getDate = (date, duration) => {
+type PropTypes = {
+    forward: SegmentsTicketType
+    back: SegmentsTicketType
+}
+
+const CityWay: React.FC<PropTypes> = ({forward, back}) => {
+    const getDate = (date: string, duration: number) => {
         const newDate = new Date(date);
         const pointA = newDate.getTime();
         const pointB = pointA + duration * 60 * 1000;

@@ -1,10 +1,7 @@
+import { SortType } from "../../types/types";
 import {CHANGE_SORT_ID} from "../types";
 import {ChangeSortIdType} from "./sortActions";
 
-type SortType = {
-    label: string,
-    id: string
-}
 
 const initialState = {
     sortTabs: [

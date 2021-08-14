@@ -2,8 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import classes from './TransferFilter.module.scss';
 import * as actions from '../../redux/TransferFilter/transferFilterActions';
+import {ParamsType} from "../../types/types";
 
-const TransferFilter = ({ params, changeFilter }) => (
+type PropTypes = {
+    params: Array<ParamsType>
+    changeFilter: (id: number) => void
+}
+
+const TransferFilter: React.FC<PropTypes> = ({ params, changeFilter }) => (
         <div className={classes.params}>
             <h5 className={classes.params__title}>Количество пересадок</h5>
             <div className={classes['params__check-block']}>
@@ -13,7 +19,6 @@ const TransferFilter = ({ params, changeFilter }) => (
                             type="checkbox" className={classes.check__input}
                             checked={i.status}
                             onChange={() => changeFilter(i.id)}
-                            value={i.status}
                         />
                         <span className={classes.check__box} />
                         {i.label}
@@ -23,7 +28,7 @@ const TransferFilter = ({ params, changeFilter }) => (
         </div>
     );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     params: state.transferFilter,
 });
 

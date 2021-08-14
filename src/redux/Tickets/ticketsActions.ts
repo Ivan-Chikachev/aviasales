@@ -2,46 +2,31 @@ import {
     ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_START, GET_TICKETS_END, OFF_LOADING,
 } from '../types';
 import ticketAPI from '../../api/api';
+import {
+    TicketsType, GetTicketsStartACType, GetTicketsEndACType, GetSearchIdACType, ErrorServerACType, OffLoadingACType
+} from '../../types/types';
 
-type GetTicketsStartACType = {
-    type: typeof GET_TICKETS_START,
-    tickets: Array<{}>
-}
-type GetTicketsEndACType = {
-    type: typeof GET_TICKETS_END,
-    tickets: Array<{}>
-}
-type GetSearchIdACType = {
-    type: typeof GET_SEARCH_ID,
-    payload: string
-}
-type ErrorServerACType = {
-    type: typeof ERROR_SERVER
-}
-type OffLoadingACType = {
-    type: typeof OFF_LOADING
-}
 
-const getTicketsStartAC = (tickets: Array<{}>) => ({
+const getTicketsStartAC = (tickets: Array<TicketsType>): GetTicketsStartACType => ({
     type: GET_TICKETS_START,
     tickets
 })
 
-const getTicketsEndAC = (tickets: Array<{}>) => ({
+const getTicketsEndAC = (tickets: Array<TicketsType>): GetTicketsEndACType => ({
     type: GET_TICKETS_END,
     tickets
 })
 
-const getSearchIdAC = (payload: string) => ({
+const getSearchIdAC = (payload: string): GetSearchIdACType => ({
     type: GET_SEARCH_ID,
     payload
 })
 
-const errorServerAC = () => ({
+const errorServerAC = (): ErrorServerACType => ({
     type: ERROR_SERVER
 })
 
-const offLoadingAC = () => ({
+const offLoadingAC = (): OffLoadingACType => ({
     type: OFF_LOADING
 })
 

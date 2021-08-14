@@ -1,12 +1,17 @@
 import React from 'react';
 import classes from '../Ticket.module.scss';
 
-const TimeWay = ({ forward, back }) => {
-    const hour = Math.floor(forward / 60);
-    const min = forward - (hour * 60);
+type PropTypes = {
+    durationTo: number
+    durationBack: number
+}
 
-    const hour2 = Math.floor(back / 60);
-    const min2 = back - (hour2 * 60);
+const TimeWay: React.FC<PropTypes> = ({ durationTo, durationBack }) => {
+    const hour = Math.floor(durationTo / 60);
+    const min = durationTo - (hour * 60);
+
+    const hour2 = Math.floor(durationBack / 60);
+    const min2 = durationBack - (hour2 * 60);
 
     return (
         <div className={classes.ticket__item}>

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import classes from './App.module.scss';
 import TransferParams from '../TransferFilter/TransferFilter';
 import TicketSort from '../TicketSort/TicketSort';
@@ -8,10 +8,26 @@ import * as actions from '../../redux/Tickets/ticketsActions';
 import Error from '../Error/Error';
 import Logo from '../Logo/Logo';
 import Loader from '../Loader/Loader';
+import {TicketsType} from "../../types/types";
 
-const App = ({
-                 isError, searchId, getSearchId, getTicketsStart, getTicketsEnd, stop, ticketsEnd, isLoad,
-             }) => {
+type PropTypes = {
+    isError: boolean
+    searchId: string
+    getSearchId: () => void
+    getTicketsStart: (searchId: string) => void
+    getTicketsEnd: (searchId: string) => void
+    stop: boolean
+    ticketsEnd: Array<TicketsType>
+    isLoad: boolean
+
+}
+
+const App: React.FC<PropTypes> = ({
+                                      isError, searchId,
+                                      getSearchId, getTicketsStart,
+                                      getTicketsEnd, stop, ticketsEnd,
+                                      isLoad,
+                                  }) => {
     useEffect(() => {
         getSearchId();
     }, []);
@@ -29,17 +45,17 @@ const App = ({
     return (
         <div className={classes.wrapper}>
             <div className={classes.container}>
-                <Logo />
+                <Logo/>
                 <div className={classes['loader-container']}>
-                    {isLoad && <Loader />}
+                    {isLoad && <Loader/>}
                 </div>
                 {isError
-                    ? <Error />
+                    ? <Error/>
                     : (
                         <div className={classes['block-grid']}>
-                            <TransferParams />
-                            <TicketSort />
-                            <Ticket />
+                            <TransferParams/>
+                            <TicketSort/>
+                            <Ticket/>
                         </div>
                     )}
             </div>
@@ -47,7 +63,7 @@ const App = ({
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     isError: state.tickets.isError,
     searchId: state.tickets.searchId,
     stop: state.tickets.stop,
