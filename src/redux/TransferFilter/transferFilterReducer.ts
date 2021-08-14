@@ -52,7 +52,7 @@ export const transferFilterReducer = (state = initialState, action: ChangeFilter
             return state.map((i: ParamsType) => {
                 if (i.id === action.id) {
                     const paramsAll = state.find((i: ParamsType) => i.id === 10)
-                    paramsAll ? paramsAll.status = false : null
+                    if(paramsAll) paramsAll.status = false
                     i.status = !i.status;
                 }
                 return i;
