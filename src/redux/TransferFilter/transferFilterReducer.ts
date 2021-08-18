@@ -1,6 +1,5 @@
 import {CHANGE_FILTER} from '../types';
-import {ChangeFilterType} from "./transferFilterActions";
-import {ParamsType} from "../../types/types";
+import {ChangeFilterType, ParamsType} from "../../types/types";
 
 type InitialStateType = Array<ParamsType>
 

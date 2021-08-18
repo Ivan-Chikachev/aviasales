@@ -1,7 +1,10 @@
 import {
  ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_START, GET_TICKETS_END, OFF_LOADING,
 } from '../types';
-import {TicketsType} from "../../types/types";
+import {
+    ActionsTicketsTypes,
+    TicketsType
+} from "../../types/types";
 
 const initialState = {
     ticketsStart: [] as Array<TicketsType>,
@@ -13,7 +16,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-export const ticketsReducer = (state = initialState, action: any): InitialStateType => {
+export const ticketsReducer = (state = initialState, action: ActionsTicketsTypes): InitialStateType => {
     switch (action.type) {
         case GET_TICKETS_START:
             return {

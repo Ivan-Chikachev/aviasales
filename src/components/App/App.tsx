@@ -18,13 +18,13 @@ type StateTypes = {
     isLoad: boolean
 }
 
-type ActionTypes = {
+type DispatchTypes = {
     getSearchId: () => void
     getTicketsStart: (searchId: string) => void
     getTicketsEnd: (searchId: string) => void
 }
 
-type PropTypes = StateTypes & ActionTypes
+type PropTypes = StateTypes & DispatchTypes
 
 const App: React.FC<PropTypes> = ({
                                       isError, searchId,
@@ -54,7 +54,8 @@ const App: React.FC<PropTypes> = ({
                     {isLoad && <Loader/>}
                 </div>
                 {isError
-                    ? <Error/>
+                    ?
+                    <Error/>
                     : (
                         <div className={classes['block-grid']}>
                             <TransferParams/>
@@ -74,4 +75,4 @@ const mapStateToProps = (state: AppStateType): StateTypes => ({
     isLoad: state.tickets.isLoad,
 });
 
-export default connect(mapStateToProps, actions)(App);
+export default connect<StateTypes, DispatchTypes, {}, AppStateType>(mapStateToProps, actions)(App);

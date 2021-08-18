@@ -3,8 +3,16 @@ import {
 } from '../types';
 import ticketAPI from '../../api/api';
 import {
-    TicketsType, GetTicketsStartACType, GetTicketsEndACType, GetSearchIdACType, ErrorServerACType, OffLoadingACType
+    TicketsType,
+    GetTicketsStartACType,
+    GetTicketsEndACType,
+    GetSearchIdACType,
+    ErrorServerACType,
+    OffLoadingACType,
+    ActionsTicketsTypes
 } from '../../types/types';
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "../rootReducer";
 
 
 const getTicketsStartAC = (tickets: Array<TicketsType>): GetTicketsStartACType => ({
@@ -31,44 +39,52 @@ const offLoadingAC = (): OffLoadingACType => ({
 })
 
 
-export const getTicketsStart = (searchId: string) => async (dispatch: any) => {
-    let action = {};
+export const getTicketsStart = (searchId: string):
+    ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes> =>
 
-    try {
-        const dataTickets = await ticketAPI.getTickets(searchId);
-        action = getTicketsStartAC(dataTickets.data.tickets);
-
-        if (!dataTickets.data.stop) {
+    async (dispatch) => {
+        try {
+            const response = await ticketAPI.getTickets(searchId);
+            const action = getTicketsStartAC(response.data.tickets);
             dispatch(action);
+
+        } catch (e) {
+            if (e.response.status === 500) {
+                dispatch(getTicketsStart(searchId))
+            } else {
+                dispatch(errorServerAC());
+            }
         }
-    } catch (e) {
-        console.log(e.status)
-        dispatch(getTicketsStart(searchId));
-    }
-};
+    };
 
-export const getTicketsEnd = (searchId: string) => async (dispatch: any) => {
-    let action = {};
+export const getTicketsEnd = (searchId: string):
+    ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes> =>
 
-    try {
-        const dataTickets = await ticketAPI.getTickets(searchId);
+    async (dispatch) => {
+        try {
+            const response = await ticketAPI.getTickets(searchId);
+            const action = getTicketsEndAC(response.data.tickets)
 
-        action = getTicketsEndAC(dataTickets.data.tickets)
+            if (!response.data.stop) {
+                dispatch(action);
+            } else {
+                dispatch(offLoadingAC());
+            }
 
-        if (!dataTickets.data.stop) {
-            dispatch(action);
-        } else {
-            dispatch(offLoadingAC());
+        } catch (e) {
+            if (e.response.status === 500) {
+                dispatch(getTicketsEnd(searchId))
+            } else {
+                dispatch(errorServerAC());
+            }
         }
-    } catch (e) {
-        dispatch(getTicketsEnd(searchId));
-    }
-};
+    };
 
 export const getSearchId = () => async (dispatch: any) => {
     try {
         const res = await ticketAPI.getSearchId();
         dispatch(getSearchIdAC(res.data.searchId));
+
     } catch (e) {
         dispatch(errorServerAC());
     }

@@ -8,6 +8,8 @@ const instance = axios.create({
 });
 
 const ticketAPI = {
+    _searchId: null,
+
     getSearchId() {
         return instance
             .get('search');

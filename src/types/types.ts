@@ -1,4 +1,12 @@
-import {ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_END, GET_TICKETS_START, OFF_LOADING} from "../redux/types";
+import {
+    CHANGE_FILTER,
+    CHANGE_SORT_ID,
+    ERROR_SERVER,
+    GET_SEARCH_ID,
+    GET_TICKETS_END,
+    GET_TICKETS_START,
+    OFF_LOADING
+} from "../redux/types";
 
 // Tickets types
 export type SegmentsTicketType = {
@@ -31,6 +39,8 @@ export type ErrorServerACType = {
 export type OffLoadingACType = {
     type: typeof OFF_LOADING
 }
+export type ActionsTicketsTypes = GetTicketsStartACType | GetSearchIdACType | GetTicketsEndACType | ErrorServerACType | OffLoadingACType
+
 
 // Transfer Params types
 
@@ -39,11 +49,19 @@ export type ParamsType = {
     id: number,
     status: boolean
 }
+export type ChangeFilterType = {
+    type: typeof CHANGE_FILTER,
+    id: number
+}
 
 // Sort types
 
 export type SortType = {
     label: string,
     id: string
+}
+export type ChangeSortIdType = {
+    type: typeof CHANGE_SORT_ID,
+    sortId: string
 }
 

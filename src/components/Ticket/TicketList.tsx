@@ -16,7 +16,7 @@ type PropTypes = StateType
 
 const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transferFilter}) => {
 
-    const [showItemCount, addShowItemCount] = useState<number>(5);
+    const [showItemCount, addShowItemCount] = useState(5);
     const [currentTickets, setCurrentTickets] = useState<Array<TicketsType>>([]);
     const [tickets, setTickets] = useState<Array<TicketsType>>([]);
     const [stop, setStop] = useState<Array<number>>([]);
@@ -66,10 +66,14 @@ const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transfe
 
     return (
         <div className={classes['ticket-container']}>
-            {currentTickets.map((i) => (
-                <TicketItem key={i.price + i.carrier} item={i}/>
-            ))}
-            {tickets.length ? null : <div>Рейсов, подходящих под заданные фильтры, не найдено</div>}
+            {tickets.length
+                ?
+                currentTickets.map((i) => (
+                    <TicketItem key={i.price + i.carrier} item={i}/>
+                ))
+                :
+                <div>Рейсов, подходящих под заданные фильтры, не найдено</div>}
+
             {tickets.length > 5 ? <ShowButton onShowClick={onShowClick}/> : null}
         </div>
     );
@@ -81,7 +85,7 @@ const mapStateToProps = (state: AppStateType): StateType => ({
         ...state.tickets.ticketsEnd,
     ],
     activeSortTab: state.sort.activeSortTab,
-    transferFilter: state.transferFilter,
+    transferFilter: state.transferFilter
 });
 
-export default connect(mapStateToProps, {})(TicketList);
+export default connect<StateType, {}, {}, AppStateType>(mapStateToProps, {})(TicketList);

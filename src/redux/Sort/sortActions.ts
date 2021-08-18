@@ -1,11 +1,7 @@
 import {CHANGE_SORT_ID} from "../types";
+import {ChangeSortIdType} from "../../types/types";
 
-export type ChangeSortIdType = {
-    type: typeof CHANGE_SORT_ID,
-    sortId: string
-}
-
-export const changeSortId = (id: string) => ({
+export const changeSortId = (id: string): ChangeSortIdType => ({
     type: CHANGE_SORT_ID,
     sortId: id
 })

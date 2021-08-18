@@ -1,6 +1,5 @@
-import { SortType } from "../../types/types";
+import {ChangeSortIdType, SortType} from "../../types/types";
 import {CHANGE_SORT_ID} from "../types";
-import {ChangeSortIdType} from "./sortActions";
 
 
 const initialState = {
