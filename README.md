@@ -1,3 +1,3 @@
 # Приложение по поиску авиа билетов
 ## Приложение доступно по ссылке
-https://aviasales-theta.vercel.app/
+https://aviasales-navy.vercel.app/
