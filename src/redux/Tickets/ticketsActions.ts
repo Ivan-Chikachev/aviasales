@@ -38,34 +38,37 @@ const offLoadingAC = (): OffLoadingACType => ({
     type: OFF_LOADING
 })
 
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes>
 
-export const getTicketsStart = (searchId: string):
-    ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes> =>
+const _responseError = (resStatus: number, fn: any) => {
+    if (resStatus === 500) {
+        dispatch(getTicketsStart(searchId))
+    } else {
+        dispatch(errorServerAC());
+    }
+}
+
+export const getTicketsStart = (searchId: string): ThunkType =>
 
     async (dispatch) => {
         try {
-            const response = await ticketAPI.getTickets(searchId);
-            const action = getTicketsStartAC(response.data.tickets);
+            const res = await ticketAPI.getTickets(searchId);
+            const action = getTicketsStartAC(res.data.tickets);
             dispatch(action);
 
         } catch (e) {
-            if (e.response.status === 500) {
-                dispatch(getTicketsStart(searchId))
-            } else {
-                dispatch(errorServerAC());
-            }
+            _responseError(e.response.status, getTicketsStart)
         }
     };
 
-export const getTicketsEnd = (searchId: string):
-    ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes> =>
+export const getTicketsEnd = (searchId: string): ThunkType =>
 
     async (dispatch) => {
         try {
-            const response = await ticketAPI.getTickets(searchId);
-            const action = getTicketsEndAC(response.data.tickets)
+            const res = await ticketAPI.getTickets(searchId);
+            const action = getTicketsEndAC(res.data.tickets)
 
-            if (!response.data.stop) {
+            if (!res.data.stop) {
                 dispatch(action);
             } else {
                 dispatch(offLoadingAC());
@@ -80,7 +83,7 @@ export const getTicketsEnd = (searchId: string):
         }
     };
 
-export const getSearchId = () => async (dispatch: any) => {
+export const getSearchId = (): ThunkType => async (dispatch) => {
     try {
         const res = await ticketAPI.getSearchId();
         dispatch(getSearchIdAC(res.data.searchId));
