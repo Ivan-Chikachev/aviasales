@@ -40,14 +40,6 @@ const offLoadingAC = (): OffLoadingACType => ({
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes>
 
-const _responseError = (resStatus: number, fn: any) => {
-    if (resStatus === 500) {
-        dispatch(getTicketsStart(searchId))
-    } else {
-        dispatch(errorServerAC());
-    }
-}
-
 export const getTicketsStart = (searchId: string): ThunkType =>
 
     async (dispatch) => {
@@ -57,7 +49,11 @@ export const getTicketsStart = (searchId: string): ThunkType =>
             dispatch(action);
 
         } catch (e) {
-            _responseError(e.response.status, getTicketsStart)
+            if (e.response.status === 500) {
+                dispatch(getTicketsStart(searchId))
+            } else {
+                dispatch(errorServerAC());
+            }
         }
     };
 
