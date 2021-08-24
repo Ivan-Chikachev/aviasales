@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import classes from './App.module.scss';
 import TransferParams from '../TransferFilter/TransferFilter';
-import TicketSort from '../TicketSort/TicketSort';
+import TicketSort from '../Sort/Sort';
 import TicketList from '../Ticket/TicketList';
 import * as actions from '../../redux/Tickets/ticketsActions';
 import Error from '../Error/Error';

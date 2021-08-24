@@ -23,7 +23,6 @@ const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transfe
 
     // Сортировка билетов
     useEffect(() => {
-        if (activeSortTab === 'all') setTickets(initialTickets);
 
         if (activeSortTab === 'cheapest') setTickets(initialTickets.sort((a, b) => a.price - b.price));
 
@@ -51,8 +50,9 @@ const TicketList: React.FC<PropTypes> = ({initialTickets, activeSortTab, transfe
 
     // Фильтрация билетов
     useEffect(() => {
-        const filterTickets = tickets.filter((i) => (stop.includes(i.segments[0].stops.length)));
-        setTickets(filterTickets);
+        const filterTicketsByForward = tickets.filter((i) => (stop.includes(i.segments[0].stops.length)));
+        const filterTicketsByBack = filterTicketsByForward.filter((i) => (stop.includes(i.segments[1].stops.length)));
+        setTickets(filterTicketsByBack);
     }, [stop]);
 
     // Обрезка массива билетов

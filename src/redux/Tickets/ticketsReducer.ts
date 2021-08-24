@@ -1,8 +1,5 @@
 import {
- ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_START, GET_TICKETS_END, OFF_LOADING,
-} from '../types';
-import {
-    ActionsTicketsTypes,
+    ActionsTicketsType,
     TicketsType
 } from "../../types/types";
 
@@ -16,21 +13,21 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-export const ticketsReducer = (state = initialState, action: ActionsTicketsTypes): InitialStateType => {
+export const ticketsReducer = (state = initialState, action: ActionsTicketsType): InitialStateType => {
     switch (action.type) {
-        case GET_TICKETS_START:
+        case "GET_TICKETS_START":
             return {
                 ...state, ticketsStart: action.tickets,
             };
-        case GET_TICKETS_END:
+        case "GET_TICKETS_END":
             return {
                 ...state, ticketsEnd: [...state.ticketsEnd, ...action.tickets],
             };
-        case GET_SEARCH_ID:
+        case "GET_SEARCH_ID":
             return { ...state, searchId: action.payload };
-        case OFF_LOADING:
+        case "OFF_LOADING":
             return { ...state, isLoad: false};
-        case ERROR_SERVER:
+        case "ERROR_SERVER":
             return { ...state, isError: true, isLoad: false };
         default:
             return state;

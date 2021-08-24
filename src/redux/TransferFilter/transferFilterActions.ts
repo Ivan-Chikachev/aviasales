@@ -1,9 +1,10 @@
-import {CHANGE_FILTER} from '../types';
-import {ChangeFilterType} from "../../types/types";
+export const filterActions = {
+    changeFilter: (id = 10) => (
+        {
+            type: 'CHANGE_FILTER',
+            id
+        } as const
+    )
+}
 
-export const changeFilter = (id = 10): ChangeFilterType => (
-    {
-        type: CHANGE_FILTER,
-        id
-    }
-)
+

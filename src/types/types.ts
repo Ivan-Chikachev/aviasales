@@ -1,14 +1,17 @@
-import {
-    CHANGE_FILTER,
-    CHANGE_SORT_ID,
-    ERROR_SERVER,
-    GET_SEARCH_ID,
-    GET_TICKETS_END,
-    GET_TICKETS_START,
-    OFF_LOADING
-} from "../redux/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "../redux/rootReducer";
+import { ticketsActions } from "../redux/Tickets/ticketsActions";
+import {filterActions} from "../redux/TransferFilter/transferFilterActions";
+import {sortActions} from "../redux/Sort/sortActions";
+
+// General
+
+type PropType<T> = T extends { [key: string]: infer U } ? U : never
+
+type InferActionsType<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropType<T>>
 
 // Tickets types
+
 export type SegmentsTicketType = {
     origin: string
     destination: string
@@ -21,38 +24,20 @@ export type TicketsType = {
     carrier: string
     segments: Array<SegmentsTicketType>
 }
-export type GetTicketsStartACType = {
-    type: typeof GET_TICKETS_START,
-    tickets: Array<TicketsType>
-}
-export type GetTicketsEndACType = {
-    type: typeof GET_TICKETS_END,
-    tickets: Array<TicketsType>
-}
-export type GetSearchIdACType = {
-    type: typeof GET_SEARCH_ID,
-    payload: string
-}
-export type ErrorServerACType = {
-    type: typeof ERROR_SERVER
-}
-export type OffLoadingACType = {
-    type: typeof OFF_LOADING
-}
-export type ActionsTicketsTypes = GetTicketsStartACType | GetSearchIdACType | GetTicketsEndACType | ErrorServerACType | OffLoadingACType
 
+export type ActionsTicketsType = InferActionsType<typeof ticketsActions>
 
-// Transfer Params types
+export type ThunkTicketsType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsType>
+
+// Transfer Filter types
 
 export type ParamsType = {
     label: string,
     id: number,
     status: boolean
 }
-export type ChangeFilterType = {
-    type: typeof CHANGE_FILTER,
-    id: number
-}
+
+export type ActionFilterType = InferActionsType<typeof filterActions>
 
 // Sort types
 
@@ -60,8 +45,6 @@ export type SortType = {
     label: string,
     id: string
 }
-export type ChangeSortIdType = {
-    type: typeof CHANGE_SORT_ID,
-    sortId: string
-}
+
+export type ActionSortType = InferActionsType<typeof sortActions>
 

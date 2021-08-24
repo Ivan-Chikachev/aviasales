@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import classes from './TransferFilter.module.scss';
-import * as actions from '../../redux/TransferFilter/transferFilterActions';
+import { filterActions } from '../../redux/TransferFilter/transferFilterActions';
 import {ParamsType} from "../../types/types";
 import {AppStateType} from "../../redux/rootReducer";
 
@@ -38,4 +38,4 @@ const mapStateToProps = (state: AppStateType) => ({
     params: state.transferFilter,
 });
 
-export default connect<StateTypes, DispatchTypes, {}, AppStateType>(mapStateToProps, actions)(TransferFilter);
+export default connect<StateTypes, DispatchTypes, {}, AppStateType>(mapStateToProps, filterActions)(TransferFilter);

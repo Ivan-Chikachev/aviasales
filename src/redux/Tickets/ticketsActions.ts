@@ -1,90 +1,80 @@
-import {
-    ERROR_SERVER, GET_SEARCH_ID, GET_TICKETS_START, GET_TICKETS_END, OFF_LOADING,
-} from '../types';
 import ticketAPI from '../../api/api';
 import {
+    ThunkTicketsType,
     TicketsType,
-    GetTicketsStartACType,
-    GetTicketsEndACType,
-    GetSearchIdACType,
-    ErrorServerACType,
-    OffLoadingACType,
-    ActionsTicketsTypes
 } from '../../types/types';
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "../rootReducer";
 
 
-const getTicketsStartAC = (tickets: Array<TicketsType>): GetTicketsStartACType => ({
-    type: GET_TICKETS_START,
-    tickets
-})
+export const ticketsActions = {
+    getTicketsStart: (tickets: Array<TicketsType>) => ({
+        type: 'GET_TICKETS_START',
+        tickets
+    } as const),
 
-const getTicketsEndAC = (tickets: Array<TicketsType>): GetTicketsEndACType => ({
-    type: GET_TICKETS_END,
-    tickets
-})
+    getTicketsEnd: (tickets: Array<TicketsType>) => ({
+        type: 'GET_TICKETS_END',
+        tickets
+    } as const),
 
-const getSearchIdAC = (payload: string): GetSearchIdACType => ({
-    type: GET_SEARCH_ID,
-    payload
-})
+    getSearchId: (payload: string) => ({
+        type: 'GET_SEARCH_ID',
+        payload
+    } as const),
 
-const errorServerAC = (): ErrorServerACType => ({
-    type: ERROR_SERVER
-})
+    errorServer: () => ({
+        type: 'ERROR_SERVER'
+    } as const),
 
-const offLoadingAC = (): OffLoadingACType => ({
-    type: OFF_LOADING
-})
+    offLoading: () => ({
+        type: 'OFF_LOADING'
+    } as const)
+}
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTicketsTypes>
-
-export const getTicketsStart = (searchId: string): ThunkType =>
+export const getTicketsStart = (searchId: string): ThunkTicketsType =>
 
     async (dispatch) => {
         try {
             const res = await ticketAPI.getTickets(searchId);
-            const action = getTicketsStartAC(res.data.tickets);
+            const action = ticketsActions.getTicketsStart(res.data.tickets);
             dispatch(action);
 
         } catch (e) {
             if (e.response.status === 500) {
                 dispatch(getTicketsStart(searchId))
             } else {
-                dispatch(errorServerAC());
+                dispatch(ticketsActions.errorServer());
             }
         }
     };
 
-export const getTicketsEnd = (searchId: string): ThunkType =>
+export const getTicketsEnd = (searchId: string): ThunkTicketsType =>
 
     async (dispatch) => {
         try {
             const res = await ticketAPI.getTickets(searchId);
-            const action = getTicketsEndAC(res.data.tickets)
+            const action = ticketsActions.getTicketsEnd(res.data.tickets)
 
             if (!res.data.stop) {
                 dispatch(action);
             } else {
-                dispatch(offLoadingAC());
+                dispatch(ticketsActions.offLoading());
             }
 
         } catch (e) {
             if (e.response.status === 500) {
                 dispatch(getTicketsEnd(searchId))
             } else {
-                dispatch(errorServerAC());
+                dispatch(ticketsActions.errorServer());
             }
         }
     };
 
-export const getSearchId = (): ThunkType => async (dispatch) => {
+export const getSearchId = (): ThunkTicketsType => async (dispatch) => {
     try {
         const res = await ticketAPI.getSearchId();
-        dispatch(getSearchIdAC(res.data.searchId));
+        dispatch(ticketsActions.getSearchId(res.data.searchId));
 
     } catch (e) {
-        dispatch(errorServerAC());
+        dispatch(ticketsActions.errorServer());
     }
 };

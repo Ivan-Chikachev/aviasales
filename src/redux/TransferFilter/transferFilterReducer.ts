@@ -1,5 +1,4 @@
-import {CHANGE_FILTER} from '../types';
-import {ChangeFilterType, ParamsType} from "../../types/types";
+import {ActionFilterType, ParamsType} from "../../types/types";
 
 type InitialStateType = Array<ParamsType>
 
@@ -31,10 +30,11 @@ const initialState = [
     },
 ];
 
-export const transferFilterReducer = (state = initialState, action: ChangeFilterType): InitialStateType => {
+export const transferFilterReducer = (state = initialState, action: ActionFilterType): InitialStateType => {
     switch (action.type) {
-        case CHANGE_FILTER:
-            if (action.id === 10 && state.find((i: ParamsType) => i.id === 10)?.status) {
+        case "CHANGE_FILTER":
+            const filterAllStatus = state.find((i: ParamsType) => i.id === 10)?.status
+            if (action.id === 10 && filterAllStatus) {
                 return state.map((i) => {
                     i.status = false;
                     return i;

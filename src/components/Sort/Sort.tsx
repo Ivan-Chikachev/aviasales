@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import classes from './TicketSort.module.scss';
-import * as actions from '../../redux/Sort/sortActions';
+import classes from './Sort.module.scss';
+import {sortActions} from '../../redux/Sort/sortActions';
 import {SortType} from "../../types/types";
 import {AppStateType} from "../../redux/rootReducer";
 
@@ -11,7 +11,7 @@ type PropTypes = {
     activeSortTab: string
 }
 
-const TicketSort: React.FC<PropTypes> = ({changeSortId, sortTabs, activeSortTab}) => (
+const Sort: React.FC<PropTypes> = ({changeSortId, sortTabs, activeSortTab}) => (
     <div className={classes.options}>
         {sortTabs.map((i) => {
             const isActive = activeSortTab === i.id ? classes.active : '';
@@ -33,4 +33,4 @@ const mapStateToProps = (state: AppStateType) => ({
     activeSortTab: state.sort.activeSortTab,
 });
 
-export default connect(mapStateToProps, actions)(TicketSort);
+export default connect(mapStateToProps, sortActions)(Sort);
